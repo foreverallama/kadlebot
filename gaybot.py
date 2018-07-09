@@ -7,6 +7,23 @@ def __init__(self, bot):
         self.bot = bot
 
 class GayStuff:
+    """Commands for the Category: GayStuff
+
+    Commands
+    --------
+    message:
+            Sends a random message in the same channel from the list 'possible_responses'
+    image:
+            Sends a random image in the same channel from the list 'path'
+    video:
+            Sends a random video in the same channel from the list 'path'
+    howgay:
+            Replies back to the user in the same channel telling how gay the user is in %
+    say:
+            Says the text sent by the user with Text-to-Speech enabled
+    whisper:
+            Sends a PM to the user with a random secret from the list 'secret'
+    """
     def __init__(self, bot):
         self.bot = bot
 
@@ -83,7 +100,7 @@ class GayStuff:
                       no_pm=True)
     async def say(self, *, payload=None):
         if (payload == None):
-            await self.bot.say('You need to specify something for me to say')
+            await self.bot.say('En helbeku. Helu?')
         else:
             await self.bot.say(payload, tts=True);
 
@@ -105,5 +122,6 @@ class GayStuff:
         await self.bot.send_message(ctx.message.author, random.choice(secret))
   
 def setup(bot):
+    """Adds the Class to the cog and logs to console"""
     bot.add_cog(GayStuff(bot))
     print('gaybot is loaded')

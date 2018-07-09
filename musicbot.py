@@ -14,6 +14,7 @@ def __init__(self, bot):
         self.bot = bot
 
 class VoiceEntry:
+    """Contains the player information"""
     def __init__(self, message, player):
         self.requester = message.author
         self.channel = message.channel
@@ -25,6 +26,7 @@ class VoiceEntry:
         return fmt.format(self.player)
 
 class VoiceState:
+    """Contains the player details"""
     def __init__(self, bot):
         self.current = None
         self.voice = None
@@ -61,7 +63,27 @@ class VoiceState:
             self.current.player.start()
             await self.play_next_song.wait()
             
-class Bhajans:
+class Music:
+    """Commands for the Category: Music
+    Works in multiple servers at once
+
+    Commands
+    --------
+    join:
+            Joins the same voice channel as the user who requested it
+    play:
+            If a search term is specified, it plays the first search result (from YouTube)
+            Else it plays a random Bhajan from the list 'url'
+            If a song is already playing, then it is added to queue
+    volume:
+            Adjusts the volume of the playback as an integer between 0 to 100
+    pause:
+            Pauses the player
+    resume:
+            Resumes the player
+    stop:
+            Stops the player and disconnects from the Voice Channel
+    """
     def __init__(self, bot):
         self.bot = bot
         self.voice_states = {}
@@ -115,26 +137,27 @@ class Bhajans:
                       pass_context=True,
                       no_pm=True)
     @commands.cooldown(3, 120, commands.BucketType.user)
-    async def play(self, ctx, *, song=None):   
-        try:
-            state = self.get_voice_state(ctx.message.server)
-            opts = {
-                'default_search': 'auto',
-                'quiet': True,
-            }
+    async def play(self, ctx, *, song=None):
+        
+        state = self.get_voice_state(ctx.message.server)
+        opts = {
+            'default_search': 'auto',
+            'quiet': True,
+        }
 
-            if state.voice is None:
-                success = await ctx.invoke(self.join)
-                if not success:
-                    return
-            url = ['https://www.youtube.com/watch?v=iW16WWmWZL4',
-                   'https://www.youtube.com/watch?v=2yAzgg3zEjM',
-                   'https://www.youtube.com/watch?v=Ezhdk82sR1Y',
-                   ]
+        if state.voice is None:
+            success = await ctx.invoke(self.join)
+            if not success:
+                return
+        url = ['https://www.youtube.com/watch?v=iW16WWmWZL4',
+               'https://www.youtube.com/watch?v=2yAzgg3zEjM',
+               'https://www.youtube.com/watch?v=Ezhdk82sR1Y',
+               ]
+        try:
             if song is None:
-                player = await state.voice.create_ytdl_player(random.choice(url))
+                player = await state.voice.create_ytdl_player(random.choice(url), after=state.toggle_next)
             else:
-                player = await state.voice.create_ytdl_player(song, ytdl_options=opts)
+                player = await state.voice.create_ytdl_player(song, ytdl_options=opts, after=state.toggle_next)
         except Exception as e:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
@@ -206,7 +229,7 @@ class Bhajans:
             await self.bot.say("Cleared the queue and disconnected from voice channel ")
         except:
             pass
-  
+      
 def setup(bot):
-    bot.add_cog(Bhajans(bot))
+    bot.add_cog(Music(bot))
     print('Bhajans is loaded')
