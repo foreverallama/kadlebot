@@ -25,22 +25,22 @@ Requirements
 
 Commands
 --------------
-- **kadle.message**
+- **kadle.message**  
 Sends a random message from given list into the same channel as requested by the user
 
-- **kadle.image**
+- **kadle.image**  
 Sends a random image from the given list into the same channel as requested by the user
 
-- **kadle.video**
+- **kadle.video**  
 Sends a random video from the given list into the same channel as requested by the user
 
-- **kadle.howgay**
+- **kadle.howgay**  
 Replies back to the user saying how gay they are (Replies with 100% gay only for kadle)
 
-- **kadle.say**
+- **kadle.say**  
 Repeats back the text entered by the user
 
-- **kadle.whisper**
+- **kadle.whisper**  
 DM's the user with a random secret defined in the list
 
 `musicbot.py`
@@ -49,23 +49,25 @@ DM's the user with a random secret defined in the list
 
 Commands
 --------------
-- **kadle.join**
+- **kadle.join**  
 Joins the voice channel the user is in
 
-- **kadle.play**
-Joins the voice channel the user is in (if not already joined) and plays a random bhajan given in the list of URLs
+- **kadle.play**  
+Joins the voice channel the user is in (if not already joined) and plays a random bhajan given in the list of URLs  
+If a search term is specified, then it plays the first YouTube search result  
+Queues the song if it is already playing
 
-- **kadle.volume**
+- **kadle.volume**  
 Adjusts the volume of the music being played 
 (An integer between 0 to 100)
 
-- **kadle.pause**
+- **kadle.pause**  
 Pauses the music
 
-- **kadle.resume**
+- **kadle.resume**  
 Resumes the music
 
-- **kadle.stop**
+- **kadle.stop**  
 Stops playing the music and leaves the voice channel
 
 Thanks to [**YetiGuy!**](https://www.youtube.com/channel/UCkPxP6J6LPBm6Ce-XAeojXQ "Channel: YetiGuy!") for his [video](https://www.youtube.com/watch?v=FpRzDY0-I1o "YetiGuy!: Create a working music bot! Discord.py & python") on how to make the music player bot.
