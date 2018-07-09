@@ -4,18 +4,18 @@ A simple Discord Bot based on Kadle using Python
 Requirements
 ===========
 * Python 3.4.2+
-* `discord` library: _pip install discord_
-* `youtube-dl` library: _pip install youtube-dl_
-* `PyNaCl` library: _pip install pynacl_ (optional, for voice only)
+* `discord` library: `pip install discord`
+* `youtube-dl` library: `pip install youtube-dl`
+* `PyNaCl` library: `pip install pynacl` (optional, for voice only)
 * `libopus.so` opus library if you're using linux (included by default for windows)(optional, voice only)
 * FFmpeg is required to stream audio. It can be downloaded from [here](https://www.ffmpeg.org/download.html "FFmpeg")
 **Note**: To host the bot on Heroku, you need the ffmpeg buildpack. Click [here](https://elements.heroku.com/buildpacks/jonathanong/heroku-buildpack-ffmpeg-latest) and follow the instructions to add the buildpack
 
 `mainbot.py`
 ===========
-* Creates the bot with prefix **_kadle._**
+* Creates the bot with prefix **kadle.**
 * Loads files `gaybot.py` and `musicbot.py`
-* Also runs a chat filter for _swear words_ and _wonderla_
+* Also runs a chat filter for certain _swear words_ and _wonderla_
 * The default help command has been removed and a new one was created and added to a cog **Utility** which returns the default help command itself
 * `on_command_error` handles the `CommandOnCooldown` exception (can also be used to handle other errors)
 
