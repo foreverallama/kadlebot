@@ -9,7 +9,9 @@ startup_extensions = ["gaybot", "musicbot"]
 TOKEN = os.environ.get('TOKEN', None)
 # Get at discordapp.com/developers/applications/me
 
-client = Bot(command_prefix='kadle.', description='Kadle says GAY!')
+client = Bot(command_prefix='kadle.',
+             description='Kadle is always here to help you. Check out my commands below',
+             pm_help=True)
 client.remove_command('help')    
 @client.event
 async def on_message(message):
