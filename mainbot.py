@@ -5,7 +5,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import os
 
-startup_extensions = ["gaybot", "musicbot"]
+startup_extensions = ["gaybot", "musicbot", "lovebot"]
 TOKEN = os.environ.get('TOKEN', None)
 # Get at discordapp.com/developers/applications/me
 
