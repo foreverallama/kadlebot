@@ -72,4 +72,17 @@ Stops playing the music and leaves the voice channel
 
 Thanks to [**YetiGuy!**](https://www.youtube.com/channel/UCkPxP6J6LPBm6Ce-XAeojXQ "Channel: YetiGuy!") for his [video](https://www.youtube.com/watch?v=FpRzDY0-I1o "YetiGuy!: Create a working music bot! Discord.py & python") on how to make the music player bot.
 
+`lovebot.py`
+==========
+**Cog:** Love
+
+Commands
+--------------
+- **kadle.date <@userid>**  
+Tells how compatible the user is and how likely they are to go on a date
+
+- **kadle.eqtest**  
+Starts a personality test by asking 5 questions to determine how likely you are to get married
+
+
 _The files_ `requirements.txt`_,_ `Procfile` _and_ `libopus.so` _are required to deploy it on Heroku_
