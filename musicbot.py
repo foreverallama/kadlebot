@@ -1,6 +1,7 @@
 import asyncio
 import discord
 import random
+import requests
 from discord.ext import commands
 if not discord.opus.is_loaded():
     # the 'opus' library here is opus.dll on windows
@@ -166,8 +167,6 @@ class Music:
             entry = VoiceEntry(ctx.message, player)
             await state.songs.put(entry)
     
-            
-
     @commands.command(name='volume',
                       description='Adjusts the volume',
                       brief='Adjust volume',
@@ -229,7 +228,39 @@ class Music:
             await self.bot.say("Cleared the queue and disconnected from voice channel ")
         except:
             pass
+
+    @commands.command(name='lyric',
+                      description='PM\'s the lyrics to the requested song',
+                      brief='Sends song lyrics',
+                      help='Sends the requested song lyrics. \nFormat: kadle.lyric [songname]-[artistname]',
+                      pass_context=True,
+                      no_pm=True)
+    async def lyric(self, ctx, *, info: str = None):
+        if info:
+            info = info.split('-')
+            song_name = info[0].split(' ')
+            artist_name = info[1].split(' ')
+            url = 'http://lyric-api.herokuapp.com/api/find/'
+            for i in range (0,len(artist_name)):
+                if i == len(artist_name) - 1:
+                    url = url + artist_name[i]
+                else:
+                    url = url + artist_name[i] + '%20'
+            url = url + '/'
+            for i in range (0,len(song_name)):
+                if i == len(song_name) - 1:
+                    url = url + song_name[i]
+                else:
+                    url = url + song_name[i] + '%20'
+            print(url)
+            content = requests.get(url)
+            if content.json()['err'] == "not found" or content.status_code != 200:
+                await self.bot.send_message(ctx.message.channel, "I'm sorry but that song is not available")
+            else:
+                await self.bot.send_message(ctx.message.author, content.json()['lyric'])
+        else:
+            await self.bot.send_message(ctx.message.channel, "You need to specifiy the song and the artist. Type `kadle.lyric [song]-[artist]")
       
 def setup(bot):
     bot.add_cog(Music(bot))
-    print('Bhajans is loaded')
+    print('Music is loaded')
